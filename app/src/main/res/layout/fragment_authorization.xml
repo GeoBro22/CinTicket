@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.AuthorizationFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Вход в профиль"
+            android:textColorHint="#4E4E4E"
+            android:textSize="40dp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"/>
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:hint="Enter Email"
+            android:lines="1"
+            android:textColorHint="#4E4E4E"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:inputType="text"
+            android:layout_margin="5dp"
+            android:background="#E7E7E7"/>
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:hint="Enter Password"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:textColorHint="#4E4E4E"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:lines="1"
+            android:inputType="text"
+            android:layout_margin="5dp"
+            android:background="#E7E7E7"/>
+
+
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_login"
+            android:text="Войти"
+
+            android:onClick="btnSignIn"
+            android:textAllCaps="false"
+            android:backgroundTint="#1E56B8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_sign_up"
+            android:textAllCaps="false"
+            android:text="Создать новый аккаунт"
+            android:backgroundTint="#1E56B8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</FrameLayout>

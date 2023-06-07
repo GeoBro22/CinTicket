@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_element"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/app_back"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Регистрация"
+        android:textColor="#FFF"
+        android:textSize="25dp" />
+
+
+    <EditText
+        android:id="@+id/edt_dia_email_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#E7E7E7"
+        android:hint="Enter Email"
+        android:inputType="textNoSuggestions"
+
+        android:lines="1"
+
+        android:padding="5dp"
+        android:textColor="@color/black" />
+
+
+    <EditText
+        android:id="@+id/edt_dia_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#E7E7E7"
+        android:hint="Enter Name"
+        android:inputType="textNoSuggestions"
+        android:lines="1"
+
+        android:padding="5dp"
+        android:textColor="@color/black" />
+
+
+    <EditText
+        android:id="@+id/edt_dia_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="#E7E7E7"
+        android:hint="Enter Password"
+        android:inputType="textNoSuggestions"
+        android:lines="1"
+        android:padding="5dp"
+
+        android:textColor="@color/black" />
+
+    <Button
+
+        android:id="@+id/btn_dia_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+
+        android:backgroundTint="#1E56B8"
+        android:text="Подтвердить"
+        android:textAllCaps="false" />
+
+
+</LinearLayout>
