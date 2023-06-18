@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:lines="1"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:layout_margin="5dp"
             android:background="#E7E7E7"/>
 

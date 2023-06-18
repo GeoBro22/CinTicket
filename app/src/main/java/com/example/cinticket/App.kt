@@ -24,7 +24,7 @@ class App : Application() {
             applicationContext,
             AppDatabase::class.java, "Cinema.db"
         )
-            .createFromAsset("CinTicketDB.db").fallbackToDestructiveMigration()
+            .createFromAsset("CinTicketDB.db")//.fallbackToDestructiveMigration()
             .build()
         val repositoryMovies = RoomMoviesRepository(db.getMoviesDao())
         val repositorySessions = SessionsRepositoryRoomImpl(db.getSessionsDao())

@@ -43,7 +43,6 @@ class TimeAdapter(
         with(holder.binding) {
             GlobalScope.launch(Dispatchers.IO) {
                 val sessionId = service.getSessionId(movieId!!, sessionDate!!, timeOfSession!!)
-                Log.d("qqq", sessionId.toString())
                 val ticketPrice = sessionId?.price
                 if (ticketPrice != null) {
                     bundle.putLong("session_id", sessionId.sessionId)
