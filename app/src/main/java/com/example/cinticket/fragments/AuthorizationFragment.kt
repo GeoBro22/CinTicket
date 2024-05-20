@@ -19,6 +19,7 @@ import com.example.cinticket.App
 import com.example.cinticket.App.Companion.FROM
 import com.example.cinticket.R
 import com.example.cinticket.Service
+import com.example.cinticket.Service.Companion.isValidEmail
 import com.example.cinticket.databinding.FragmentAuthorizationBinding
 import com.example.cinticket.entities.Account
 import com.example.cinticket.sharedpreferences.SharedPrefs
@@ -136,7 +137,7 @@ class AuthorizationFragment : Fragment() {
 
             lifecycleScope.launch(Dispatchers.IO) {
 
-                if (str_dia_email_id == "" || str_dia_password == "" || !service.isValidEmail(str_dia_email_id)) {
+                if (str_dia_email_id == "" || str_dia_password == "" || !isValidEmail(str_dia_email_id)) {
                     launch(Dispatchers.Main) {
                         Toast.makeText(context, "Пожалуйста, введите корректные данные.", Toast.LENGTH_SHORT)
                             .show()

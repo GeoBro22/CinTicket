@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.cinticket.App
 import com.example.cinticket.R
 import com.example.cinticket.Service
+import com.example.cinticket.Service.Companion.isValidDate
+import com.example.cinticket.Service.Companion.isValidEmail
 import com.example.cinticket.accounts.entities.AccountUpdateCardInfoTuple
 import com.example.cinticket.boughttickets.entities.TicketInsertTuple
 import com.example.cinticket.databinding.FragmentPaymentBinding
@@ -50,7 +52,7 @@ class PaymentFragment : Fragment() {
         val chosenTickets = arguments?.getIntegerArrayList("chosen_tickets")
         val sessionId = arguments?.getLong("session_id")
         binding.payBtn.setOnClickListener {
-            if (binding.cardNumber.text.toString().length == 16 && binding.cardDate.text.toString().length == 5 && service.isValidDate(binding.cardDate.text.toString()) && binding.CVVCode.text.toString().length == 3 && service.isValidEmail(binding.email.text.toString())) {
+            if (binding.cardNumber.text.toString().length == 16 && binding.cardDate.text.toString().length == 5 && isValidDate(binding.cardDate.text.toString()) && binding.CVVCode.text.toString().length == 3 && isValidEmail(binding.email.text.toString())) {
                 var updatedAccountCardInfo = AccountUpdateCardInfoTuple(
                     0L, "0", "1", 0L
                 )

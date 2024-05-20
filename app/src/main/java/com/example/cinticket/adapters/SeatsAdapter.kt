@@ -17,15 +17,15 @@ import com.example.cinticket.databinding.ItemSeatBinding
 
 class SeatsAdapter(
     private val seats: List<Long>,
-    private val selledPlaces:List<Long>,
-    private val price:Int,
-    private val binder:FragmentHallBinding,
-    private val controller:NavController,
+    private val selledPlaces: List<Long>,
+    private val price: Int,
+    private val binder: FragmentHallBinding,
+    private val controller: NavController,
     private val sessionId: Long,
     private val context: Context
 ) : BaseAdapter() {
 
-    private val chosenTickets= ArrayList<Int>()
+    private val chosenTickets = ArrayList<Int>()
     override fun getCount(): Int = seats.size
 
     override fun getItem(position: Int): Any = seats[position]
@@ -46,24 +46,26 @@ class SeatsAdapter(
 
 
         view.setOnClickListener {
-            val prvPrice=bindingFragment.price.text.toString().substring(0,bindingFragment.price.text.toString().length-1)
+            val prvPrice = bindingFragment.price.text.toString()
+                .substring(0, bindingFragment.price.text.toString().length - 1)
 //            if (prvPrice=="")
 //                prvPrice="0"
-            when (bindingElement.movieImage.imageTintList){
-                ColorStateList.valueOf(Color.GREEN) ->  {
+            when (bindingElement.movieImage.imageTintList) {
+                ColorStateList.valueOf(Color.GREEN) -> {
                     bindingElement.movieImage.imageTintList = ColorStateList.valueOf(Color.RED)
-                    bindingFragment.price.text= (prvPrice.toInt() + price).toString()+"₽"
-                    chosenTickets.add(position+1)
+                    bindingFragment.price.text = (prvPrice.toInt() + price).toString() + "₽"
+                    chosenTickets.add(position + 1)
                 }
-                ColorStateList.valueOf(Color.RED) ->{
+
+                ColorStateList.valueOf(Color.RED) -> {
                     bindingElement.movieImage.imageTintList = ColorStateList.valueOf(Color.GREEN)
-                    bindingFragment.price.text= (prvPrice.toInt() - price).toString()+"₽"
-                    chosenTickets.remove(position+1)
+                    bindingFragment.price.text = (prvPrice.toInt() - price).toString() + "₽"
+                    chosenTickets.remove(position + 1)
                 }
 
             }
             //val tmp =bindingFragment.price.text.toString().substring(0,bindingFragment.price.text.toString().length-1)
-            Log.d("qqqq",prvPrice)
+
         }
         bindingFragment.buyBtn.setOnClickListener {
             if (chosenTickets.size == 0)
@@ -71,9 +73,9 @@ class SeatsAdapter(
             else {
                 bundle.putIntegerArrayList("chosen_tickets", chosenTickets)
                 bundle.putLong("session_id", sessionId)
-                bundle.putString("price",bindingFragment.price.text.toString())
+                bundle.putString("price", bindingFragment.price.text.toString())
 
-                controller.navigate(R.id.paymentFragment,bundle)
+                controller.navigate(R.id.paymentFragment, bundle)
 
             }
         }

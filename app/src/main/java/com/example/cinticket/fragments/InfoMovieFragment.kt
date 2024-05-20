@@ -23,16 +23,6 @@ class InfoMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentInfoMovieBinding.inflate(inflater, container, false)
-        val youTubePlayerView = binding.payerYx
-        lifecycle.addObserver(youTubePlayerView)
-        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = arguments?.getString("movie_video")
-                if (videoId != null) {
-                    youTubePlayer.cueVideo(videoId,0f)
-                }
-            }
-        })
         val controller = findNavController()
         Glide.with(binding.poster.context).load( arguments?.getString("movie_poster")).into(binding.poster)
         binding.movieName.text = arguments?.getString("movie_name")

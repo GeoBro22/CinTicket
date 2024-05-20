@@ -9,12 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cinticket.adapters.GenreAdapter
 import com.example.cinticket.adapters.MovieAdapter
 import com.example.cinticket.databinding.FragmentMainBinding
+import com.example.cinticket.fragments.SettingsFragment
+import com.example.cinticket.sharedpreferences.SharedPrefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -26,6 +32,8 @@ class MainFragment : Fragment() {
     private lateinit var adapterTomorrow: MovieAdapter
     private val service: Service
         get() = (context?.applicationContext as App).service
+    private val sharedPreference: SharedPrefs
+        get() = (context?.applicationContext as App).sharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +45,13 @@ class MainFragment : Fragment() {
         val adapterSoon = MovieAdapter(controller)
         val adapterGenre= GenreAdapter(controller,service,requireActivity())
         lifecycleScope.launch(Dispatchers.IO) {
+            val movies = service.getMoviesFromApi()
+            if (sharedPreference.getLong("movies_ready")==null) {
+                for (movie in movies) {
+                    sharedPreference.saveLong("movies_ready", 1)
+                    service.insertMovie(movie)
+                }
+            }
             val tm = service.getTomorrowMovies()
             val sm = service.getSoonMovies()
             val genres=service.getGenres()
@@ -63,7 +78,9 @@ class MainFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.recyclerGenre.layoutManager = layoutManagerGenre
         binding.recyclerGenre.adapter = adapterGenre
+
         binding.settingsBtn.setOnClickListener {
+
             controller.navigate(
                 R.id.settingsFragment,
             )

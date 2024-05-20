@@ -1,17 +1,51 @@
 package com.example.cinticket
 
+import com.example.cinticket.Service.Companion.isValidDate
+import com.example.cinticket.Service.Companion.isValidEmail
+import org.junit.Assert
 import org.junit.Test
 
-import org.junit.Assert.*
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
+class EmailValidatorTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun isValidEmail_ValidEmail_ReturnsTrue() {
+        val email = "test@gmail.com"
+
+        val isValid = isValidEmail(email)
+
+        Assert.assertTrue(isValid)
+    }
+
+    @Test
+    fun isValidEmail_InvalidEmail_ReturnsFalse() {
+
+        val email = "invalidemail.com"
+
+
+        val isValid = isValidEmail(email)
+
+        Assert.assertFalse(isValid)
+    }
+}
+
+class DateValidatorTest {
+
+    @Test
+    fun isValidDate_ValidDate_ReturnsTrue() {
+
+        val date = "12/31"
+
+        val isValid = isValidDate(date)
+
+        Assert.assertTrue(isValid)
+    }
+
+    @Test
+    fun isValidDate_InvalidDate_ReturnsFalse() {
+
+        val date = "1231"
+
+        val isValid = isValidDate(date)
+
+        Assert.assertFalse(isValid)
     }
 }

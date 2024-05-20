@@ -6,6 +6,7 @@ import com.example.cinticket.accounts.room.AccountsRepositoryRoomImpl
 import com.example.cinticket.boughttickets.room.TicketsRepositoryRoomImpl
 import com.example.cinticket.movies.room.RoomMoviesRepository
 import com.example.cinticket.places.room.PlacesRepositoryRoomImpl
+import com.example.cinticket.retrofit.RetrofitClass
 import com.example.cinticket.room.AppDatabase
 import com.example.cinticket.sessions.room.SessionsRepositoryRoomImpl
 import com.example.cinticket.sharedpreferences.SharedPrefs
@@ -31,8 +32,9 @@ class App : Application() {
         val repositoryAccounts= AccountsRepositoryRoomImpl(db.getAccountsDao())
         val repositoryPlaces = PlacesRepositoryRoomImpl(db.getPlacesDao())
         val repositoryTickets = TicketsRepositoryRoomImpl(db.getTicketsDao())
+        val retrofitRepository = RetrofitClass()
         sharedPreferences=SharedPrefs(applicationContext)
-        service = Service(repositoryMovies,repositoryAccounts,repositorySessions,repositoryPlaces,repositoryTickets)
+        service = Service(repositoryMovies,repositoryAccounts,repositorySessions,repositoryPlaces,repositoryTickets,retrofitRepository)
     }
 
 }

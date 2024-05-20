@@ -9,7 +9,9 @@ import com.example.cinticket.entities.Movie
 import com.example.cinticket.entities.Session
 import com.example.cinticket.entities.Ticket
 import com.example.cinticket.movies.room.RoomMoviesRepository
+import com.example.cinticket.movies.room.entities.MovieDbEntity
 import com.example.cinticket.places.PlacesRepository
+import com.example.cinticket.retrofit.RetrofitClass
 import com.example.cinticket.sessions.SessionsRepository
 import com.example.cinticket.sessions.room.entities.SessionIdAndPriceTuple
 
@@ -18,18 +20,23 @@ class Service(
     private val accountsRepository: AccountsRepository,
     private val sessionsRepository: SessionsRepository,
     private val placesRepository: PlacesRepository,
-    private val ticketsRepository: TicketsRepository
+    private val ticketsRepository: TicketsRepository,
+    private val retrofitRepository: RetrofitClass
 ) {
     private var tomorrowMovies = mutableListOf<Movie>()
     private var soonMovies = mutableListOf<Movie>()
+
     //init
-    fun isValidEmail(email: String): Boolean {
-        val regex = Regex("^[A-Za-z]+[A-Za-z0-9._-]*[A-Za-z0-9]*@gmail.com")
-        return regex.matches(email)
-    }
-    fun isValidDate(date: String): Boolean {
-        val regex = Regex("^[0-9]{2}/[0-9]{2}")
-        return regex.matches(date)
+    companion object {
+        fun isValidEmail(email: String): Boolean {
+            val regex = Regex("^[A-Za-z]+[A-Za-z0-9._-]*[A-Za-z0-9]*@gmail.com")
+            return regex.matches(email)
+        }
+
+        fun isValidDate(date: String): Boolean {
+            val regex = Regex("^[0-9]{2}/[0-9]{2}")
+            return regex.matches(date)
+        }
     }
 
 
@@ -79,17 +86,28 @@ class Service(
         return sessionsRepository.getSessionId(movieId, date, time)
     }
 
-    suspend fun updateAccountCardInfo(updatedAccountCardInfo: AccountUpdateCardInfoTuple){
-        if (updatedAccountCardInfo.accountId!=0L)
+    suspend fun updateAccountCardInfo(updatedAccountCardInfo: AccountUpdateCardInfoTuple) {
+        if (updatedAccountCardInfo.accountId != 0L)
             accountsRepository.updateAccountCardInfo(updatedAccountCardInfo)
     }
-    suspend fun insertNewTicket(newTicket: TicketInsertTuple){
+
+    suspend fun insertNewTicket(newTicket: TicketInsertTuple) {
         ticketsRepository.insertNewTicket(newTicket)
     }
-    suspend fun getMovieOfGenre(genre: String): List<Movie>?{
+
+    suspend fun getMovieOfGenre(genre: String): List<Movie>? {
         return moviesRepository.getMovieOfGenre(genre)?.toMutableList()
     }
-    suspend fun getGenres(): List<String>?{
+
+    suspend fun getGenres(): List<String>? {
         return moviesRepository.getGenres()?.toSet()?.toMutableList()
+    }
+
+    suspend fun insertMovie(movie: MovieDbEntity) {
+        moviesRepository.insertMovie(movie)
+    }
+
+    suspend fun getMoviesFromApi():MutableList<MovieDbEntity>{
+        return retrofitRepository.getMoviesFromApi()
     }
 }

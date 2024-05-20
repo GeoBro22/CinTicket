@@ -2,6 +2,7 @@ package com.example.cinticket.movies.room
 
 import com.example.cinticket.entities.Movie
 import com.example.cinticket.movies.MoviesRepository
+import com.example.cinticket.movies.room.entities.MovieDbEntity
 
 class RoomMoviesRepository(private val moviesDao:MoviesDao): MoviesRepository {
 
@@ -17,5 +18,8 @@ class RoomMoviesRepository(private val moviesDao:MoviesDao): MoviesRepository {
 
     override suspend fun getGenres(): List<String>? {
         return moviesDao.getGenres()
+    }
+    override suspend fun insertMovie(movieDbEntity:MovieDbEntity){
+        moviesDao.insertMovie(movieDbEntity)
     }
 }

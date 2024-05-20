@@ -1,6 +1,7 @@
 package com.example.cinticket.movies.room
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import com.example.cinticket.movies.room.entities.MovieDbEntity
 
@@ -18,4 +19,7 @@ interface MoviesDao {
 
     @Query("SELECT genre FROM movies WHERE isnow = 1")
     suspend fun getGenres(): List<String>?
+
+    @Insert
+    suspend fun insertMovie(movie: MovieDbEntity)
 }
